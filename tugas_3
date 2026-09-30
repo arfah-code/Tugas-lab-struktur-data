@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+struct Node{
+    char data;
+    Node* next;
+};
+
+Node* top = nullptr;
+
+// Push: tambah node baru di atas stack
+void push(char c){
+    Node* baru = new Node();
+    baru->data = c;
+    baru->next = top;
+    top = baru;
+}
+
+// IsEmpty
+
+
+bool isEmpty(){
+    return top == nullptr;
+}
+
+// Pop: ambil dan hapus node paling atas
+char pop(){
+    Node* hapus = top;
+    char c = hapus->data;
+    top = top->next;
+    delete hapus;
+    return c;
+
+}
+
+int main(){
+    string kata;
+    cout << "Masukkan sebuah kata: ";
+    cin >> kata;
+
+    // Push setiap huruf ke stack (dari kiri ke kanan)
+    for (int i = 0; i < kata.length(); i++) {
+        push(kata[i]);
+    }
+
+    // Pop semua huruf, urutannya otomatis terbalik (LIFO)
+    string terbalik = "";
+    while (!isEmpty()) {
+        terbalik += pop();
+    }
+
+    cout << "Kata terbalik: " << terbalik << endl;
+
+    return 0;
+}
