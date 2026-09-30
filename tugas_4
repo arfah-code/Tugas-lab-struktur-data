@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* kiri;
+    Node* kanan;
+};
+
+// Tambah node: lebih kecil -> kiri, lebih besar -> kanan
+void tambah(Node*& root, int data) {
+    if (root == NULL) {
+        root = new Node();
+        root->data = data;
+        root->kiri = NULL;
+        root->kanan = NULL;
+    } else {
+        if (data < root->data) {
+            tambah(root->kiri, data);
+        } else if (data > root->data) {
+            tambah(root->kanan, data);
+        }
+        // data yang sama diabaikan
+    }
+}
+
+// Pre-order : Root -> Kiri -> Kanan
+void preOrder(Node* root) {
+    if (root == NULL) return;
+    cout << root->data << " ";
+    preOrder(root->kiri);
+    preOrder(root->kanan);
+}
+
+// In-order : Kiri -> Root -> Kanan
+void inOrder(Node* root) {
+    if (root == NULL) return;
+    inOrder(root->kiri);
+    cout << root->data << " ";
+    inOrder(root->kanan);
+}
+
+// Post-order : Kiri -> Kanan -> Root
+void postOrder(Node* root) {
+    if (root == NULL) return;
+    postOrder(root->kiri);
+    postOrder(root->kanan);
+    cout << root->data << " ";
+}
+
+int main() {
+    Node* root = NULL;
+    int angka;
+
+    cout << "Masukkan angka (0 = stop) : ";
+    cin >> angka;
+
+    while (angka != 0) {
+        tambah(root, angka);
+        cin >> angka;
+    }
+
+    cout << "Pre-order  : ";
+    preOrder(root);
+    cout << endl;
+
+    cout << "In-order   : ";
+    inOrder(root);
+    cout << endl;
+
+    cout << "Post-order : ";
+    postOrder(root);
+    cout << endl;
+
+    return 0;
+}
