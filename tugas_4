@@ -7,7 +7,7 @@ struct Node {
     Node* kanan;
 };
 
-// Tambah node: lebih kecil -> kiri, lebih besar -> kanan
+// Tambah node: levih kecil -> kiri, lebih besar -> kanan
 void tambah(Node*& root, int data) {
     if (root == NULL) {
         root = new Node();
@@ -24,7 +24,7 @@ void tambah(Node*& root, int data) {
     }
 }
 
-// Pre-order : Root -> Kiri -> Kanan
+// Pre-order: Root -> Kiri -> Kanan.
 void preOrder(Node* root) {
     if (root == NULL) return;
     cout << root->data << " ";
@@ -32,7 +32,7 @@ void preOrder(Node* root) {
     preOrder(root->kanan);
 }
 
-// In-order : Kiri -> Root -> Kanan
+// In-order:Kiri -> Root -> Kanan
 void inOrder(Node* root) {
     if (root == NULL) return;
     inOrder(root->kiri);
@@ -40,7 +40,7 @@ void inOrder(Node* root) {
     inOrder(root->kanan);
 }
 
-// Post-order : Kiri -> Kanan -> Root
+// Post-order :Kiri ->Kanan ->Root
 void postOrder(Node* root) {
     if (root == NULL) return;
     postOrder(root->kiri);
